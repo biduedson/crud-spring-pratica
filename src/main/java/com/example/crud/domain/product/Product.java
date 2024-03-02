@@ -3,6 +3,8 @@ package com.example.crud.domain.product;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Table(name = "product" )
 @Entity(name = "product")
 @Getter
@@ -12,10 +14,18 @@ import lombok.*;
 @EqualsAndHashCode(of = "id")
 public class Product {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
-    private  String id;
+    private  String  id;
 
     private  String name;
 
-    private  Number price_in_cents;
+    private  Integer price_in_cents;
+
+    private  Boolean active;
+    public  Product(RequestProductDTO requestProductDTO){
+        this.name = requestProductDTO.name();
+        this.price_in_cents = requestProductDTO.price_in_cents();
+        this.active = true;
+
+    }
 
 }
